@@ -54,30 +54,51 @@ function Signup() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  //modified for backend
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     const validationErrors = validateForm();
     
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
+        setErrors(validationErrors);
+        return;
     }
 
-    console.log('Form submitted:', formData);
-    
-    // Reseting fields after submission
-    setFormData({
-      fullName: '',
-      email: '',
-      phone: '',
-      password: '',
-      confirmPassword: '',
-      terms: false,
-    });
-    
-    setErrors({});
-  };
+    try {
+        const response = await fetch('http://localhost/backend/index.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(formData),
+        });
+
+        if (!response.ok) { 
+            const errorText = await response.text();
+            setErrors({ server: errorText });
+            return;
+        }
+
+        const result = await response.text();
+        console.log('Response from server:', result);
+        
+        // Reset fields after submission
+        setFormData({
+            fullName: '',
+            email: '',
+            phone: '',
+            password: '',
+            confirmPassword: '',
+            terms: false,
+        });
+        
+        setErrors({});
+    } catch (error) {
+        console.error('Error:', error);
+        setErrors({ server: 'An unexpected error occurred. Please try again.' }); // <-- Changed: Set a generic error message for unexpected errors
+    }
+};
 
   return (
     <div>

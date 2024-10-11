@@ -31,7 +31,7 @@ h2 .main{
 }
 
 h2 .sub{
-    font-size: 13px;
+    font-size: 12px;
     font-family: monospace;
     letter-spacing: normal;
 
@@ -69,7 +69,7 @@ label img{
 
 .form-field input {
     width: 90%;
-    height: 40px;
+    height: 30px;
     background-color: #f0f0f0;
     color: #333;
     border: 1px solid #ccc;

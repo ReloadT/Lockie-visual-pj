@@ -6,22 +6,49 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (event) => {
+  //modified for backend
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Validation
     if (!email || !password) {
-      setError('Please fill in all fields.');
-      return;
+        setError('Please fill in all fields.');
+        return;
     }
 
-    console.log('Logging in with:', { email, password });
+    try {
+        const response = await fetch('http://localhost/backend/index.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                email,
+                password,
+                login: true
+            }),
+        });
 
-    // Clear the form and error message after submission
-    setError('');
-    setEmail('');
-    setPassword('');
-  };
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            setError(errorText);
+            return;
+        }
+
+        const result = await response.text();
+        console.log('Response from server:', result);
+        
+        // Clear fields after submission
+        setError('');
+        setEmail('');
+        setPassword('');
+        
+    } catch (error) {
+        console.error('Error:', error);
+        setError('An unexpected error occurred. Please try again.');
+    }
+};
 
   return (
     <div className="login-container">

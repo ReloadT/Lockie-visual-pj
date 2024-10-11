@@ -18,7 +18,7 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     border-radius: 100px;
     align-items: center;
-    padding: 20px;
+    padding: 15px;
     color: black;
     max-width: 500px; 
     width: 90%; 
@@ -36,7 +36,6 @@ h2 .main {
 h2 .sub {
     font-size: 13px;
     font-family: monospace;
-    letter-spacing: 1px;
 }
 
 .actual-form {
@@ -71,12 +70,16 @@ label img{
 
 .form-field input {
     width: calc(100% - 30px);
-    height: 35px; 
+    height: 30px; 
     background-color: #f0f0f0; 
     color: #333; 
     border: 1px solid #ccc; 
     border-radius: 10px; 
     padding-left: 15px; 
+}
+
+.tnc{
+    font-size: 13px;
 }
 
 .btn {
@@ -100,24 +103,35 @@ label img{
      }
 
      h2 .main {
-        font-size: 18px;
+        font-size: 15px;
      }
 
      h2 .sub {
-        font-size: 12px;
+        font-size: 11px;
+        letter-spacing: normal;
      }
 
      label img{
         width: 15px;
     }
 
+    .form-field label{
+        margin-top: 12px;
+        font-size: 12px;
+    }
+
      .form-field input {
-        height: 40px;
+        height: 30px;
         padding-left: 10px;
      }
 
+     .tnc{
+        font-size: 11px;
+    }
+
      .log-btn {
-        width: 90%;
+        width: 80%;
         padding: 10px;
+        border-radius: 100px;
      }
 }
